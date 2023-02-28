@@ -4,7 +4,7 @@
 
 ## Схема навигации:
 
-![img](navigation_layout.png)
+![img](docs/navigation_layout.png)
 
 \* С любой страницы можно вернуться на главную
 
@@ -65,4 +65,4 @@
 
 ## Схема базы данных:
 
-![img](db_layout.png)
+![img](docs/db_layout.png)
