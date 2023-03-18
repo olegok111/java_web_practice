@@ -11,13 +11,13 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:application.properties")
 public class HibernateDatabaseConfig {
-    @Value("org.postgresql.Driver")
+    @Value("${dbdriver}")
     private String DB_DRIVER;
-    @Value("jdbc:postgresql://localhost/postgres")
+    @Value("${dburl}")
     private String DB_URL;
-    @Value("postgres")
+    @Value("${dbusername}")
     private String DB_USERNAME;
-    @Value("0000")
+    @Value("${dbpassword}")
     private String DB_PASSWORD;
 
     @Bean
