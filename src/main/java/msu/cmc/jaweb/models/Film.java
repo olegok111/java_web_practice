@@ -2,7 +2,6 @@ package msu.cmc.jaweb.models;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "film")
@@ -22,6 +21,10 @@ public class Film implements CommonEntity<Long> {
     @Column(nullable = false, name = "title")
     @NonNull
     private String title;
+
+    @Column(nullable = false, name = "genre")
+    @NonNull
+    private String genre;
 
     @Column(nullable = false, name = "company")
     @NonNull

@@ -4,7 +4,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import org.postgresql.util.PGmoney;
-import java.util.Objects;
 
 @Entity
 @Table(name = "rental")

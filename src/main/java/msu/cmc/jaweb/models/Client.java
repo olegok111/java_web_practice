@@ -2,7 +2,6 @@ package msu.cmc.jaweb.models;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "client")
