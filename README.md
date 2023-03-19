@@ -1,6 +1,4 @@
 
-[//]: # (TODO: correct PNGs to include 'genre')
-
 # Web-практикум: Видеопрокат (стриминг)
 
 ВМК МГУ, 6 семестр
