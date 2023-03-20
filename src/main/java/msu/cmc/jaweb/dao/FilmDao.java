@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FilmDao extends CommonDao<Film, Long> {
 
-    List<Film> getAllFilmByName(String filmName);
+    List<Film> getAllFilmByTitle(String filmTitle);
     Film getFilmById(Long id);
 
 }
