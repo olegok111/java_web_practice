@@ -36,7 +36,7 @@ public class ClientDaoTest {
     }
 
     @AfterEach
-    void destroy() {
+    void eraseClients() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.createSQLQuery("TRUNCATE client RESTART IDENTITY CASCADE;").executeUpdate();
@@ -48,5 +48,11 @@ public class ClientDaoTest {
     void test1() {
         List<Client> clientList = (List<Client>) clientDao.getAll();
         assertEquals(6, clientList.size());
+    }
+
+    @Test
+    void test2() {
+        List<Client> clientList = clientDao.getAllClientByName("Спенсер");
+        assertEquals(2, clientList.size());
     }
 }
