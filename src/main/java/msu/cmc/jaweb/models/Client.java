@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Table(name = "client")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor

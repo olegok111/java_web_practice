@@ -24,6 +24,7 @@ public class ClientDaoImpl extends CommonDaoImpl<Client, Long> implements Client
         }
     }
 
+    @Override
     public Client getClientById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             Query<Client> query = session.createQuery("FROM Client WHERE id = :queryId", Client.class)

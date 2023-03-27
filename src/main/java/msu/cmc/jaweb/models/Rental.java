@@ -1,24 +1,25 @@
 package msu.cmc.jaweb.models;
 
 import lombok.*;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+
 import org.postgresql.util.PGmoney;
 
 @Entity
 @Table(name = "rental")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Rental implements CommonEntity<Long> {
 
-    private enum RentalMethod {
+    public enum RentalMethod {
         RENT,
         PURCHASE
-    };
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

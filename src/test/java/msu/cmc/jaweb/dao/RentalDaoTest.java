@@ -1,30 +1,38 @@
 package msu.cmc.jaweb.dao;
 
+import msu.cmc.jaweb.models.Client;
+import msu.cmc.jaweb.models.Rental;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
+import org.postgresql.util.PGmoney;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
-import msu.cmc.jaweb.models.Client;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
+import java.util.ArrayList;
 
+import static msu.cmc.jaweb.models.Rental.RentalMethod.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestPropertySource(locations = "classpath:application.properties")
-public class ClientDaoTest {
+public class RentalDaoTest {
 
     @Autowired
     private ClientDao clientDao;
     @Autowired
+    private FilmDao filmDao;
+    @Autowired
+    private RentalDao rentalDao;
+    @Autowired
     private SessionFactory sessionFactory;
 
     @BeforeEach
-    void addClients() {
+    void addRentals() {
         List<Client> clientList = new ArrayList<>();
         clientList.add(new Client(1000L, "Гэри Джон Браннан", "garybrannan@gmail.com", "+44718979983"));
         clientList.add(new Client(1001L, "Марта Элизабет Браннан", "martha121212@hotmail.com", "+44818767009"));
@@ -33,50 +41,16 @@ public class ClientDaoTest {
         clientList.add(new Client("Айседора Дункан", "i.duncan@gmail.com"));
         clientList.add(new Client(null, "Спенсер Джонс", "spenser0jones@gmail.com", "+17338901991"));
         clientDao.saveCollection(clientList);
+
+        // TODO: add films and rentals
     }
 
     @AfterEach
-    void eraseClients() {
+    void eraseRentals() {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            session.createSQLQuery("TRUNCATE client RESTART IDENTITY CASCADE;").executeUpdate();
+            session.createSQLQuery("TRUNCATE rental RESTART IDENTITY CASCADE;").executeUpdate();
             session.getTransaction().commit();
         }
-    }
-
-    @Test
-    void testGetAll() {
-        List<Client> clientList = (List<Client>) clientDao.getAll();
-        assertEquals(6, clientList.size());
-    }
-
-    @Test
-    void testGetMultiple() {
-        List<Client> clientList = clientDao.getAllClientByName("Спенсер");
-        assertEquals(2, clientList.size());
-    }
-
-    @Test
-    void testId1() {
-        Client client = clientDao.getClientById(1L);
-        assertEquals("Гэри Джон Браннан", client.getFull_name());
-    }
-
-    @Test
-    void testTooBigId() {
-        Client client = clientDao.getClientById(1000L);
-        assertNull(client);
-    }
-
-    @Test
-    void testEmail() {
-        List<Client> clientList = clientDao.getAllClientByName("Чаплин");
-        assertEquals("chaplin@chaplin.net", clientList.get(0).getEmail());
-    }
-
-    @Test
-    void testPhone() {
-        List<Client> clientList = clientDao.getAllClientByName("Спенсер Джонс");
-        assertEquals("+17338901991", clientList.get(0).getPhone());
     }
 }

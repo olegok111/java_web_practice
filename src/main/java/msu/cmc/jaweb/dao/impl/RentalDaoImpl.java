@@ -4,10 +4,12 @@ import msu.cmc.jaweb.dao.RentalDao;
 import msu.cmc.jaweb.models.Rental;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.List;
 
+@Repository
 public class RentalDaoImpl extends CommonDaoImpl<Rental, Long> implements RentalDao {
 
     public RentalDaoImpl() {

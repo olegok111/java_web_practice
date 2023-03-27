@@ -5,6 +5,7 @@ import msu.cmc.jaweb.models.CommonEntity;
 import java.util.Collection;
 
 public interface CommonDao<T extends CommonEntity<ID>, ID> {
+
     T getById(ID id);
 
     Collection<T> getAll();
