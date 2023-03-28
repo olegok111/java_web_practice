@@ -81,15 +81,6 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
         }
     }
 
-    @Override
-    public Film getFilmById(Long id) {
-        try (Session session = sessionFactory.openSession()) {
-            Query<Film> query = session.createQuery("FROM Film WHERE id = :queryId", Film.class)
-                    .setParameter("queryId", id);
-            return query.getResultList().size() == 0 ? null : query.getSingleResult();
-        }
-    }
-
     private String likeTemplate(String s) {
         return "%" + s + "%";
     }

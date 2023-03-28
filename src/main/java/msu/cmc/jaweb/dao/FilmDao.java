@@ -13,7 +13,5 @@ public interface FilmDao extends CommonDao<Film, Long> {
     List<Film> getAllFilmByDirector(String director);
     List<Film> getAllFilmByRentPrice(Long from, Long to);
     List<Film> getAllFilmByPurchasePrice(Long from, Long to);
-    Film getFilmById(Long id);
-    // TODO: replace this method with generic getById method
 
 }

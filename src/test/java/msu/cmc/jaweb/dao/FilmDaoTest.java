@@ -27,7 +27,7 @@ public class FilmDaoTest {
     void addFilms() {
         List<Film> films = new ArrayList<>();
         films.add(new Film("Закованная фильмой", "неизвестно", "Нептун", "Никанор Туркин", 1918L));
-        films.add(new Film(null, "Трон", "научная фантастика", "Walt Disney Pictures", "Стивен Лисбергер", 1982L, 149L, 69L));
+        films.add(new Film(3000L, "Трон", "научная фантастика", "Walt Disney Pictures", "Стивен Лисбергер", 1982L, 149L, 69L));
         films.add(new Film(null, "Звёздные войны: Эпизод 4 - Новая надежда", "фантастика",
                 "Lucasfilm", "Джордж Лукас", 1977L, 249L, 99L));
         films.add(new Film(null, "Звёздные войны: Эпизод 5 - Империя наносит ответный удар", "фантастика",
