@@ -52,48 +52,77 @@ public class FilmDaoTest {
     @Test
     void testId() {
         Film film = filmDao.getById(1L);
-        assertEquals("Закованная фильмой", film.getTitle());
+        assertNotNull(film);
+        assertEquals(1L, film.getId());
     }
 
     @Test
     void testYear() {
         List<Film> films = filmDao.getAllFilmByYear(0L, 1983L);
         assertEquals(5, films.size());
+
+        for (Film film : films) {
+            assertTrue(film.getRelease_year() >= 0L &&
+                       film.getRelease_year() <= 1983L);
+        }
     }
 
     @Test
     void testTitle() {
         List<Film> films = filmDao.getAllFilmByTitle("Звёздные войны");
         assertEquals(3, films.size());
+
+        for (Film film : films) {
+            assertTrue(film.getTitle().contains("Звёздные войны"));
+        }
     }
 
     @Test
     void testCompany() {
         List<Film> films = filmDao.getAllFilmByCompany("Disney");
         assertEquals(1, films.size());
+        assertEquals("Walt Disney Pictures", films.get(0).getCompany());
     }
 
     @Test
     void testDirector() {
         List<Film> films = filmDao.getAllFilmByDirector("Кэмерон");
         assertEquals(2, films.size());
+
+        for (Film film : films) {
+            assertEquals("Джеймс Кэмерон", film.getDirector());
+        }
     }
 
     @Test
     void testGenre() {
         List<Film> films = filmDao.getAllFilmByGenre("фантастика");
         assertEquals(6, films.size());
+
+        for (Film film : films) {
+            assertTrue(film.getGenre().contains("фантастика"));
+        }
     }
 
     @Test
     void testRentPrice() {
         List<Film> films = filmDao.getAllFilmByRentPrice(0L, 80L);
         assertEquals(2, films.size());
+
+        for (Film film : films) {
+            assertTrue(film.getRent_price() >= 0L &&
+                       film.getRent_price() <= 80L);
+        }
     }
 
     @Test
     void testPurchasePrice() {
         List<Film> films = filmDao.getAllFilmByPurchasePrice(120L, 1000L);
         assertEquals(5, films.size());
+
+        for (Film film : films) {
+            assertTrue(film.getPurchase_price() >= 120L &&
+                       film.getPurchase_price() <= 1000L);
+        }
     }
 }

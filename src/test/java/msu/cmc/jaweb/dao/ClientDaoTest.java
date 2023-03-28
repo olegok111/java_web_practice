@@ -79,4 +79,25 @@ public class ClientDaoTest {
         List<Client> clientList = clientDao.getAllClientByName("Спенсер Джонс");
         assertEquals("+17338901991", clientList.get(0).getPhone());
     }
+
+    @Test
+    void testUpdate() {
+        Client client = clientDao.getById(1L);
+        client.setPhone("+78005553535");
+        clientDao.update(client);
+        assertEquals("+78005553535", clientDao.getById(1L).getPhone());
+    }
+
+    @Test
+    void testDelete() {
+        List<Client> clients = clientDao.getAllClientByName("Айседора Дункан");
+        clientDao.delete(clients.get(0));
+        assertNull(clientDao.getAllClientByName("Айседора Дункан"));
+    }
+
+    @Test
+    void testDeleteById() {
+        clientDao.deleteById(3L);
+        assertNull(clientDao.getById(3L));
+    }
 }

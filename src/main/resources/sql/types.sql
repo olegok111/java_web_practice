@@ -6,6 +6,3 @@ CHECK (VALUE ~ '^[^@]+@[^@]+\..{2,}$');
 
 CREATE DOMAIN phone_no AS text
 CHECK (VALUE ~ '^\+?[1-9]\d{1,14}$');
-
-CREATE TYPE rental_method
-AS ENUM ('rent', 'purchase');
