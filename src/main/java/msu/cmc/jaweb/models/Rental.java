@@ -5,8 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-import org.postgresql.util.PGmoney;
-
 @Entity
 @Table(name = "rental")
 @Getter
@@ -51,5 +49,5 @@ public class Rental implements CommonEntity<Long> {
 
     @Column(nullable = false, name = "price")
     @NonNull
-    private PGmoney price;
+    private Long price;
 }

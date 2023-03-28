@@ -7,5 +7,5 @@ CREATE TABLE rental (
     rent_or_purchase rental_method NOT NULL,
     start_time timestamp NOT NULL,
     end_time timestamp,
-    price money NOT NULL
+    price int NOT NULL
 );

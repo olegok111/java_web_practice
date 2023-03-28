@@ -7,6 +7,6 @@ CREATE TABLE film (
     company text NOT NULL,
     director text NOT NULL,
     release_year int NOT NULL,
-    purchase_price money,
-    rent_price money
+    purchase_price int,
+    rent_price int
 );

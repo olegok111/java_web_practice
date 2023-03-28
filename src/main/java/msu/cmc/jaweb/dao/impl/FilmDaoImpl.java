@@ -4,7 +4,6 @@ import msu.cmc.jaweb.dao.FilmDao;
 import msu.cmc.jaweb.models.Film;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import org.postgresql.util.PGmoney;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -39,7 +38,7 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     public List<Film> getAllFilmByGenre(String genre) {
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE genre LIKE :queryGenre", Film.class)
-                    .setParameter("queryGenre", genre);
+                    .setParameter("queryGenre", likeTemplate(genre));
             return query.getResultList().size() == 0 ? null : query.getResultList();
         }
     }
@@ -63,7 +62,7 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     }
 
     @Override
-    public List<Film> getAllFilmByRentPrice(PGmoney from, PGmoney to) {
+    public List<Film> getAllFilmByRentPrice(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE rent_price BETWEEN :from AND :to", Film.class)
                     .setParameter("from", from)
@@ -73,7 +72,7 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     }
 
     @Override
-    public List<Film> getAllFilmByPurchasePrice(PGmoney from, PGmoney to) {
+    public List<Film> getAllFilmByPurchasePrice(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE purchase_price BETWEEN :from AND :to", Film.class)
                     .setParameter("from", from)

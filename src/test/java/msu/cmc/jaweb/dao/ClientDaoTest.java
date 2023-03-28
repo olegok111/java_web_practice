@@ -58,13 +58,13 @@ public class ClientDaoTest {
 
     @Test
     void testId1() {
-        Client client = clientDao.getClientById(1L);
+        Client client = clientDao.getById(1L);
         assertEquals("Гэри Джон Браннан", client.getFull_name());
     }
 
     @Test
     void testTooBigId() {
-        Client client = clientDao.getClientById(1000L);
+        Client client = clientDao.getById(1000L);
         assertNull(client);
     }
 
