@@ -10,4 +10,9 @@ public class ErrorController {
     public String error() {
         return "error";
     }
+    
+    @GetMapping(value = "/")
+    public String index() {
+        return "index";
+    }
 }
