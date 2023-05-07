@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public SpringTemplateEngine templateEngine() {
+    public SpringTemplateEngine myTemplateEngine() {
 
         var templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
@@ -40,7 +40,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         var viewResolver = new ThymeleafViewResolver();
 
-        viewResolver.setTemplateEngine(templateEngine());
+        viewResolver.setTemplateEngine(myTemplateEngine());
         viewResolver.setCharacterEncoding("UTF-8");
 
         return viewResolver;
