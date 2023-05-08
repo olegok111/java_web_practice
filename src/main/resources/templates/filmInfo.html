@@ -5,7 +5,26 @@
     <title>Страница фильма</title>
 </head>
 <body>
-    <div th:replace="common :: site-header"></div>
-    <div th:replace="common :: site-footer"></div>
+<div th:replace="common :: site-header"></div>
+<h4 th:text="'#' + ${film.getId()} + ' ' + ${film.getTitle()}"></h4>
+<p th:text="'Жанр: ' + ${film.getGenre()}"></p>
+<p th:text="'Компания: ' + ${film.getCompany()}"></p>
+<p th:text="'Режиссёр: ' + ${film.getDirector()}"></p>
+<p th:text="'Год выхода: ' + ${film.getRelease_year()}"></p>
+<p th:text="${film.getPurchase_price()} ? 'Цена покупки: ' + ${film.getPurchase_price()} : 'Покупка невозможна'"></p>
+<p th:text="${film.getRent_price()} ? 'Цена аренды: ' + ${film.getRent_price()} : 'Аренда невозможна'"></p>
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <form method="get" action="/filmEdit">
+        <input type="hidden" name="filmId" th:value="${film.getId()}"/>
+        <button id="editButton" type="submit" class="btn btn-secondary">Редактировать</button>
+    </form>
+    <form method="post" action="/filmDelete">
+        <input type="hidden" name="filmId" th:value="${film.getId()}"/>
+        <button id="deleteButton" type="submit" class="btn btn-secondary">Удалить</button>
+    </form>
+</div>
+
+<div th:replace="common :: site-footer"></div>
 </body>
 </html>

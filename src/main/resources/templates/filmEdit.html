@@ -5,7 +5,24 @@
     <title>Редактирование фильма</title>
 </head>
 <body>
-    <div th:replace="common :: site-header"></div>
-    <div th:replace="common :: site-footer"></div>
+<div th:replace="common :: site-header"></div>
+<form method="post" action="/filmSave">
+    <label for="filmTitle">Название:</label>
+    <input type="text" id="filmTitle" name="title" required th:value="${film.getTitle()}"><br>
+    <label for="filmGenre">Жанр:</label>
+    <input type="text" id="filmGenre" name="genre" required th:value="${film.getGenre()}"><br>
+    <label for="filmCompany">Компания:</label>
+    <input type="text" id="filmCompany" name="company" required th:value="${film.getCompany()}"><br>
+    <label for="filmDirector">Режиссёр:</label>
+    <input type="text" id="filmDirector" name="director" required th:value="${film.getDirector()}"><br>
+    <label for="filmReleaseYear">Год выхода:</label>
+    <input type="number" id="filmReleaseYear" name="releaseYear" required th:value="${film.getRelease_year()}"><br>
+    <label for="filmPurchasePrice">Цена покупки:</label>
+    <input type="number" id="filmPurchasePrice" name="purchasePrice" th:value="${film.getPurchase_price()}"><br>
+    <label for="filmRentPrice">Цена аренды:</label>
+    <input type="number" id="filmRentPrice" name="rentPrice" th:value="${film.getRent_price()}"><br>
+    <input type="submit" id="submitButton" value="Сохранить" class="btn">
+</form>
+<div th:replace="common :: site-footer"></div>
 </body>
 </html>
