@@ -11,8 +11,8 @@
 <p th:text="'Компания: ' + ${film.getCompany()}"></p>
 <p th:text="'Режиссёр: ' + ${film.getDirector()}"></p>
 <p th:text="'Год выхода: ' + ${film.getRelease_year()}"></p>
-<p th:text="${film.getPurchase_price()} ? 'Цена покупки: ' + ${film.getPurchase_price()} : 'Покупка невозможна'"></p>
-<p th:text="${film.getRent_price()} ? 'Цена аренды: ' + ${film.getRent_price()} : 'Аренда невозможна'"></p>
+<p th:text="${film.getPurchase_price()} ? 'Цена покупки: ' + ${film.getPurchase_price()} + ' ₽' : 'Покупка невозможна'"></p>
+<p th:text="${film.getRent_price()} ? 'Цена аренды: ' + ${film.getRent_price()} + ' ₽' : 'Аренда невозможна'"></p>
 
 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
     <form method="get" action="/filmEdit">
