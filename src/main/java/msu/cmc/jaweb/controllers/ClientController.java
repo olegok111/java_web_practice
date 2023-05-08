@@ -23,6 +23,8 @@ public class ClientController {
 
     @GetMapping("/clientInfo")
     public String clientInfoPage(@RequestParam(name = "clientId") Long clientId, Model model) {
+        Client testClient = new Client(null, "Тестович", "t@t.com", "+77777777777");
+        clientDao.save(testClient);
         Client client = clientDao.getById(clientId);
 
         if (client == null) {
@@ -31,6 +33,7 @@ public class ClientController {
         }
 
         model.addAttribute("clientService", clientDao);
+        model.addAttribute("client", client);
         return "clientInfo";
     }
 
