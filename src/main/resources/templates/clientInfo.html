@@ -9,7 +9,19 @@
 
     <h4 th:text="'#' + ${client.getId()} + ' ' + ${client.getFull_name()}"></h4>
     <p th:text="'E-mail: ' + ${client.getEmail()}"></p>
-    <p th:if="${client.getPhone() != null}" th:text="'Телефон: ' + ${client.getPhone()}"></p>
+    <p th:text="${client.getPhone()} ? 'Телефон: ' + ${client.getPhone()} : 'Телефон: (нет)'"></p>
+
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <form method="get" action="/clientEdit">
+            <input type="hidden" name="clientId" th:value="${client.getId()}"/>
+            <button id="editButton" type="submit" class="btn btn-secondary">Редактировать</button>
+        </form>
+        <form method="post" action="/clientDelete">
+            <input type="hidden" name="clientId" th:value="${client.getId()}"/>
+            <button id="deleteButton" type="submit" class="btn btn-secondary">Удалить</button>
+        </form>
+    </div>
+
     <div th:replace="common :: site-footer"></div>
 </body>
 </html>

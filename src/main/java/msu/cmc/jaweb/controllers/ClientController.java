@@ -23,12 +23,10 @@ public class ClientController {
 
     @GetMapping("/clientInfo")
     public String clientInfoPage(@RequestParam(name = "clientId") Long clientId, Model model) {
-        Client testClient = new Client(null, "Тестович", "t@t.com", "+77777777777");
-        clientDao.save(testClient);
         Client client = clientDao.getById(clientId);
 
         if (client == null) {
-            model.addAttribute("error_msg", "В базе нет криента с ID = " + clientId);
+            model.addAttribute("error_msg", "В базе нет криента с ID " + clientId);
             return "error";
         }
 
@@ -38,33 +36,34 @@ public class ClientController {
     }
 
     @GetMapping("/clientEdit")
-    public String clientEditPage(@RequestParam(name = "clientId") Long clientId, Model model) {
+    public String clientEditPage(@RequestParam(name = "clientId", required = false) Long clientId, Model model) {
+        if (clientId == null) {
+            model.addAttribute("client", new Client());
+            return "clientEdit";
+        }
 
+        Client client = clientDao.getById(clientId);
+
+        if (client == null) {
+            model.addAttribute("error_msg", "В базе нет клиента с ID " + clientId);
+            return "error";
+        }
+
+        model.addAttribute("client", client);
         return "clientEdit";
     }
 
     @PostMapping("/clientSave")
-    public String clientSave(@RequestParam(name = "clientId") Long clientId,
-                             @RequestParam(name = "fullName") String fullName,
+    public String clientSave(@RequestParam(name = "fullName") String fullName,
                              @RequestParam(name = "email") String email,
-                             @RequestParam(name = "phone") String phone,
-                             Model model) {
-        Client client = clientDao.getById(clientId);
-
-        if (client == null) {
-            client = new Client(clientId, fullName, email, phone);
-        } else {
-            client.setFull_name(fullName);
-            client.setEmail(email);
-            client.setPhone(phone);
-        }
-
-        model.addAttribute("error_msg", "Данные не сохранены");
-        return "error";
+                             @RequestParam(name = "phone") String phone) {
+        Client client = new Client(null, fullName, email, phone);
+        clientDao.save(client);
+        return String.format("redirect:/clientInfo?clientId=%d", client.getId());
     }
 
-    @PostMapping("/clientRemove")
-    public String clientRemove(@RequestParam(name = "clientId") Long clientId) {
+    @PostMapping("/clientDelete")
+    public String clientDelete(@RequestParam(name = "clientId") Long clientId) {
         clientDao.deleteById(clientId);
         return "redirect:/clients";
     }
