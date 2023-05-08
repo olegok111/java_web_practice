@@ -5,7 +5,9 @@
     <title>Ошибка</title>
 </head>
 <body>
+    <div th:replace="common :: site-header"></div>
     <h2>Произошла ошибка.</h2>
     <p th:text="${error_msg}"></p>
+    <div th:replace="common :: site-footer"></div>
 </body>
 </html>
