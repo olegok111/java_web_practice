@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Фильмы</title>
+    <style>
+        .indent {
+            margin: 20px 30px;
+        }
+    </style>
 </head>
 <body>
-    <div th:replace="common :: site-header"></div>
-    <div th:replace="common :: site-footer"></div>
+<div th:replace="common :: site-header"></div>
+
+<div class="indent">
+    <form method="get" action="/filmEdit">
+        <button id="addfilmButton" type="submit" class="btn btn-primary">Добавить фильм</button>
+    </form>
+    <br>
+
+    <table class="table table-bordered table-warning">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" th:if="${!films.isEmpty()}">Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${films.isEmpty()}">
+            <td colspan="6"> В базе пока нет ни одного фильма. <a href="/filmEdit">Добавить?</a></td>
+        </tr>
+        <tr th:each="film : ${films}">
+            <td><a th:href="'/filmInfo?filmId=' + ${film.getId()}">
+                <span th:text="${film.getTitle()}"> </span></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="common :: site-footer"></div>
 </body>
 </html>

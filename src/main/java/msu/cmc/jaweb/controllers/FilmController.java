@@ -10,6 +10,8 @@ import msu.cmc.jaweb.dao.FilmDao;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class FilmController {
 
@@ -18,6 +20,8 @@ public class FilmController {
 
     @GetMapping("/films")
     public String filmsPage(Model model) {
+        List<Film> films = (List<Film>) filmDao.getAll();
+        model.addAttribute("films", films);
         return "films";
     }
 

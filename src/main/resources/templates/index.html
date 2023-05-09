@@ -5,6 +5,13 @@
     <title>Главная страница</title>
 </head>
 <body>
-    <div th:replace="common :: site-footer"></div>
+<table>
+    <tr>
+        <td><a href="/films">Фильмы</a></td>
+        <td><a href="/rentals">Прокаты</a></td>
+        <td><a href="/clients">Клиенты</a></td>
+    </tr>
+</table>
+<div th:replace="common :: site-footer"></div>
 </body>
 </html>

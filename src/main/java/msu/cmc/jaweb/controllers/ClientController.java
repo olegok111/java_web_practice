@@ -10,6 +10,8 @@ import msu.cmc.jaweb.dao.ClientDao;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class ClientController {
 
@@ -18,6 +20,8 @@ public class ClientController {
 
     @GetMapping("/clients")
     public String clientsPage(Model model) {
+        List<Client> clients = (List<Client>) clientDao.getAll();
+        model.addAttribute("clients", clients);
         return "clients";
     }
 
