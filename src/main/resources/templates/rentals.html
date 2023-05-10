@@ -38,7 +38,11 @@
             <td><span th:text="${rental.getFilm().getTitle()}"></span></td>
             <td><span th:text="${rental.getStart_time()}"></span></td>
             <td><span th:text="${rental.getEnd_time()} ?: '-'"></span></td>
-            <td><span th:text="${rental.getPrice()}"></span></td>
+            <td><span th:text="${rental.getPrice()} + ' ₽'"></span></td>
+            <td><form method="post" action="/rentalDelete">
+                <input type="hidden" name="rentalId" th:value="${rental.getId()}"/>
+                <button id="deleteButton" type="submit">Удалить</button>
+            </form></td>
         </tr>
         </tbody>
     </table>

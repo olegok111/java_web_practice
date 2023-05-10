@@ -13,9 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static msu.cmc.jaweb.models.Rental.RentalMethod.*;
 
@@ -28,6 +32,15 @@ public class RentalController {
     private final ClientDao clientDao = new ClientDaoImpl();
     @Autowired
     private final FilmDao filmDao = new FilmDaoImpl();
+
+    @GetMapping("/rentals")
+    public String rentalsPage(Model model) {
+        List<Rental> rentals = (List<Rental>) rentalDao.getAll();
+        model.addAttribute("rentals", rentals);
+        model.addAttribute("RENT", RENT);
+        model.addAttribute("PURCHASE", PURCHASE);
+        return "rentals";
+    }
 
     @GetMapping("/rentalAdd")
     public String rentalAddPage(@RequestParam(name = "clientId") Long clientId, Model model) {
@@ -51,12 +64,35 @@ public class RentalController {
         return "rentalAdd";
     }
     
-    @GetMapping("/rentals")
-    public String rentalsPage(Model model) {
-        List<Rental> rentals = (List<Rental>) rentalDao.getAll();
-        model.addAttribute("rentals", rentals);
-        model.addAttribute("RENT", RENT);
-        model.addAttribute("PURCHASE", PURCHASE);
-        return "rentals";
+    @PostMapping("/rentalSave")
+    public String rentalSave(@RequestParam(name = "clientId") Long clientId,
+                             @RequestParam(name = "filmId") Long filmId,
+                             @RequestParam(name = "rentalMethod") Rental.RentalMethod rentalMethod,
+                             @RequestParam(name = "startTime") String startTimeStr) {
+        Client client = clientDao.getById(clientId);
+        Film film = filmDao.getById(filmId);
+        LocalDateTime startTimeLdt = LocalDateTime.parse(startTimeStr);
+        Timestamp startTime = Timestamp.valueOf(startTimeLdt);
+        Timestamp endTime;
+        Long price;
+
+        if (rentalMethod == RENT) {
+            // every rent lasts a day (or 86_400_000 millis)
+            endTime = new Timestamp(startTime.getTime() + TimeUnit.DAYS.toMillis(1));
+            price = film.getRent_price();
+        } else {
+            endTime = null;
+            price = film.getPurchase_price();
+        }
+
+        Rental rental = new Rental(null, film, client, rentalMethod, startTime, endTime, price);
+        rentalDao.save(rental);
+        return "redirect:/rentals";
+    }
+
+    @PostMapping("/rentalDelete")
+    public String rentalDelete(@RequestParam(name = "rentalId") Long rentalId) {
+        rentalDao.deleteById(rentalId);
+        return "redirect:/rentals";
     }
 }

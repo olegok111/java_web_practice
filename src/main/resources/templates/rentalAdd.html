@@ -14,11 +14,9 @@
 
 <div class="indent">
     <form method="post" action="/rentalSave">
-        <label for="client">Клиент:</label>
-        <select id="client" name="clientId" disabled>
-            <option th:value="${client.getId()}" th:text="${client.getFull_name()}">
-            </option>
-        </select><br>
+        <input type="hidden" id="clientId" name="clientId" th:value="${client.getId()}">
+        <span th:text="'Добавление проката для клиента' + ${client.getFull_name()}"></span>
+        <br>
         <label for="film">Фильм:</label>
         <select id="film" name="filmId">
             <option th:each="film : ${films}" th:value="${film.getId()}" th:text="${film.getTitle()}">
@@ -28,8 +26,8 @@
         <input type="radio" id="rent" name="rentalMethod" th:value="${RENT}">
         <label for="purchase">Покупка</label>
         <input type="radio" id="purchase" name="rentalMethod" th:value="${PURCHASE}"><br>
-        <label for="beginTime">Время начала:</label>
-        <input type="datetime-local" id="beginTime" name="beginTime"><br>
+        <label for="startTime">Время начала:</label>
+        <input type="datetime-local" id="startTime" name="startTime"><br>
         <input type="submit" value="Сохранить">
     </form>
 </div>
