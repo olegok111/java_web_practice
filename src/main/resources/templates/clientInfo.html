@@ -12,6 +12,10 @@
     <p th:text="${client.getPhone()} ? 'Телефон: ' + ${client.getPhone()} : 'Телефон: (нет)'"></p>
 
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <form method="get" action="/rentalAdd">
+            <input type="hidden" name="clientId" th:value="${client.getId()}"/>
+            <button id="addRentalButton" type="submit" class="btn btn-secondary">Новый прокат</button>
+        </form>
         <form method="get" action="/clientEdit">
             <input type="hidden" name="clientId" th:value="${client.getId()}"/>
             <button id="editButton" type="submit" class="btn btn-secondary">Редактировать</button>

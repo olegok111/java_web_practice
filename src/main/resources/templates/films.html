@@ -22,6 +22,7 @@
         <thead class="thead-dark">
         <tr>
             <th scope="col" th:if="${!films.isEmpty()}">Название</th>
+            <th scope="col" th:if="${!films.isEmpty()}">Жанр</th>
         </tr>
         </thead>
         <tbody>
@@ -30,7 +31,11 @@
         </tr>
         <tr th:each="film : ${films}">
             <td><a th:href="'/filmInfo?filmId=' + ${film.getId()}">
-                <span th:text="${film.getTitle()}"> </span></a></td>
+                <span th:text="${film.getTitle()}"> </span></a>
+            </td>
+            <td>
+                <span th:text="${film.getGenre()}"> </span>
+            </td>
         </tr>
         </tbody>
     </table>

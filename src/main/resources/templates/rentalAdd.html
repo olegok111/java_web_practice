@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление проката</title>
+    <style>
+        .indent {
+            margin: 20px 30px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="common :: site-header"></div>
+
+<div class="indent">
+    <form method="post" action="/rentalSave">
+        <label for="client">Клиент:</label>
+        <select id="client" name="clientId" disabled>
+            <option th:value="${client.getId()}" th:text="${client.getFull_name()}">
+            </option>
+        </select><br>
+        <label for="film">Фильм:</label>
+        <select id="film" name="filmId">
+            <option th:each="film : ${films}" th:value="${film.getId()}" th:text="${film.getTitle()}">
+            </option>
+        </select><br>
+        <label for="rent">Аренда</label>
+        <input type="radio" id="rent" name="rentalMethod" th:value="${RENT}">
+        <label for="purchase">Покупка</label>
+        <input type="radio" id="purchase" name="rentalMethod" th:value="${PURCHASE}"><br>
+        <label for="beginTime">Время начала:</label>
+        <input type="datetime-local" id="beginTime" name="beginTime"><br>
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
+
+<div th:replace="common :: site-footer"></div>
+</body>
+</html>

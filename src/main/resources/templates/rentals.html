@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Прокаты</title>
+    <style>
+        .indent {
+            margin: 20px 30px;
+        }
+    </style>
 </head>
 <body>
-    <div th:replace="common :: site-header"></div>
-    <div th:replace="common :: site-footer"></div>
+<div th:replace="common :: site-header"></div>
+
+<div class="indent">
+    <table class="table table-bordered table-warning">
+        <thead class="thead-dark">
+        <tr th:if="${!rentals.isEmpty()}">
+            <th scope="col">Тип</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Фильм</th>
+            <th scope="col">Время начала</th>
+            <th scope="col">Время конца</th>
+            <th scope="col">Стоимость</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${rentals.isEmpty()}">
+            <td colspan="6"> В базе пока нет ни одного проката.
+                Добавьте прокат на странице клиента. </td>
+        </tr>
+        <tr th:each="rental : ${rentals}">
+            <td>
+                <span th:if="${rental.getRent_or_purchase() == RENT}">А</span>
+                <span th:if="${rental.getRent_or_purchase() == PURCHASE}">П</span>
+            </td>
+            <td><span th:text="${rental.getClient().getFull_name()}"></span></td>
+            <td><span th:text="${rental.getFilm().getTitle()}"></span></td>
+            <td><span th:text="${rental.getStart_time()}"></span></td>
+            <td><span th:text="${rental.getEnd_time()} ?: '-'"></span></td>
+            <td><span th:text="${rental.getPrice()}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="common :: site-footer"></div>
 </body>
 </html>
