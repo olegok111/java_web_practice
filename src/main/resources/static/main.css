@@ -1,0 +1,21 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.site-footer, .site-header, .site-header a {
+    background-color: #07315f;
+    color: #ffffff;
+}
+
+.site-header, .site-footer {
+    height: 30px;
+}
+
+.indent {
+    margin: 20px 30px;
+}

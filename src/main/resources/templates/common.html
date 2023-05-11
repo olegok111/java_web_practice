@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Общие элементы страниц</title>
+    <link rel="stylesheet" type="text/css" th:href="@{main.css}">
 </head>
 <body>
-    <div th:fragment="site-header">
+    <div class="site-header" th:fragment="site-header">
         <a href="/">Главная страница</a>
     </div>
-    <div th:fragment="site-footer">
+    <div class="site-footer" th:fragment="site-footer">
         Сайт управления данными о видео-стриминге. Окоёмов Олег, 2023
     </div>
 </body>
