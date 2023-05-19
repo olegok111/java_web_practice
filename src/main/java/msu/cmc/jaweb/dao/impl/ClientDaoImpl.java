@@ -17,6 +17,10 @@ public class ClientDaoImpl extends CommonDaoImpl<Client, Long> implements Client
 
     @Override
     public List<Client> getAllClientByName(String clientName) {
+        if (clientName == null || clientName.isBlank()) {
+            return (List<Client>) getAll();
+        }
+
         try (Session session = sessionFactory.openSession()) {
             Query<Client> query = session.createQuery("FROM Client WHERE full_name LIKE :queryName", Client.class)
                     .setParameter("queryName", likeTemplate(clientName));

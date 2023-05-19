@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +41,7 @@ public class RentalController {
         model.addAttribute("rentals", rentals);
         model.addAttribute("RENT", RENT);
         model.addAttribute("PURCHASE", PURCHASE);
+        model.addAttribute("search", false);
         return "rentals";
     }
 
@@ -62,6 +65,37 @@ public class RentalController {
         model.addAttribute("RENT", RENT);
         model.addAttribute("PURCHASE", PURCHASE);
         return "rentalAdd";
+    }
+    
+    @GetMapping("/rentalSearch")
+    public String rentalSearch(@RequestParam(name = "from", required = false) String fromTimeStr,
+                               @RequestParam(name = "to", required = false) String toTimeStr,
+                               Model model) {
+        Timestamp fromTime, toTime;
+
+        if (fromTimeStr == null || fromTimeStr.isBlank()) {
+            fromTime = null;
+        } else {
+            LocalDateTime fromTimeLdt = LocalDateTime.parse(fromTimeStr);
+            fromTime = Timestamp.valueOf(fromTimeLdt);
+        }
+
+        if (toTimeStr == null || toTimeStr.isBlank()) {
+            toTime = null;
+        } else {
+            LocalDateTime toTimeLdt = LocalDateTime.parse(toTimeStr);
+            toTime = Timestamp.valueOf(toTimeLdt);
+        }
+
+        List<Rental> res = rentalDao.getAllRentalByPeriod(fromTime, toTime);
+
+        if (res == null) {
+            res = new ArrayList<>();
+        }
+
+        model.addAttribute("rentals", res);
+        model.addAttribute("search", true);
+        return "rentals";
     }
     
     @PostMapping("/rentalSave")
