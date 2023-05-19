@@ -9,11 +9,34 @@
 <div th:replace="common :: site-header"></div>
 
 <div class="indent">
+    <form method="get" action="/filmSearch">
+        <label for="filmTitle">Название:</label>
+        <input type="text" id="filmTitle" name="title"><br>
+        <label for="filmGenre">Жанр:</label>
+        <input type="text" id="filmGenre" name="genre"><br>
+        <label for="filmCompany">Компания:</label>
+        <input type="text" id="filmCompany" name="company"><br>
+        <label for="filmDirector">Режиссёр:</label>
+        <input type="text" id="filmDirector" name="director"><br>
+        <label for="filmReleaseYearFrom">Год выхода: от</label>
+        <input type="number" id="filmReleaseYearFrom" name="releaseYearFrom">
+        <label for="filmReleaseYearTo">до</label>
+        <input type="number" id="filmReleaseYearTo" name="releaseYearTo"><br>
+        <label for="filmPurchasePriceFrom">Цена покупки: от</label>
+        <input type="number" id="filmPurchasePriceFrom" name="purchasePriceFrom">
+        <label for="filmPurchasePriceTo">до</label>
+        <input type="number" id="filmPurchasePriceTo" name="purchasePriceTo"><br>
+        <label for="filmRentPriceFrom">Цена аренды: от</label>
+        <input type="number" id="filmRentPriceFrom" name="rentPriceFrom">
+        <label for="filmRentPriceTo">до</label>
+        <input type="number" id="filmRentPriceTo" name="rentPriceTo"><br>
+        <input type="submit" id="submitButton" value="Найти" class="btn">
+    </form>
+    <br>
     <form method="get" action="/filmEdit">
         <button id="addfilmButton" type="submit" class="btn btn-primary">Добавить фильм</button>
     </form>
     <br>
-
     <table class="table table-bordered table-warning">
         <thead class="thead-dark">
         <tr>
@@ -23,7 +46,8 @@
         </thead>
         <tbody>
         <tr th:if="${films.isEmpty()}">
-            <td colspan="6"> В базе пока нет ни одного фильма. <a href="/filmEdit">Добавить?</a></td>
+            <td colspan="6" th:if="${search}"> Таких фильмов нет.</td>
+            <td colspan="6" th:unless="${search}"> В базе пока нет ни одного фильма. <a href="/filmEdit">Добавить?</a></td>
         </tr>
         <tr th:each="film : ${films}">
             <td><a th:href="'/filmInfo?filmId=' + ${film.getId()}">

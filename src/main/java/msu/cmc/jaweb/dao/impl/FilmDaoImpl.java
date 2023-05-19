@@ -17,6 +17,10 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
 
     @Override
     public List<Film> getAllFilmByTitle(String filmTitle) {
+        if (filmTitle == null || filmTitle.isBlank()) {
+            return (List<Film>) getAll();
+        }
+
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE title LIKE :filmTitle", Film.class)
                     .setParameter("filmTitle", likeTemplate(filmTitle));
@@ -27,6 +31,14 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     @Override
     public List<Film> getAllFilmByYear(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
+            if (from == null) {
+                from = 0L;
+            }
+
+            if (to == null) {
+                to = Long.MAX_VALUE;
+            }
+
             Query<Film> query = session.createQuery("FROM Film WHERE release_year BETWEEN :from AND :to", Film.class)
                     .setParameter("from", from)
                     .setParameter("to", to);
@@ -36,6 +48,10 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
 
     @Override
     public List<Film> getAllFilmByGenre(String genre) {
+        if (genre == null || genre.isBlank()) {
+            return (List<Film>) getAll();
+        }
+
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE genre LIKE :queryGenre", Film.class)
                     .setParameter("queryGenre", likeTemplate(genre));
@@ -45,6 +61,10 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
 
     @Override
     public List<Film> getAllFilmByCompany(String company) {
+        if (company == null || company.isBlank()) {
+            return (List<Film>) getAll();
+        }
+
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE company LIKE :queryCompany", Film.class)
                     .setParameter("queryCompany", likeTemplate(company));
@@ -54,6 +74,10 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
 
     @Override
     public List<Film> getAllFilmByDirector(String director) {
+        if (director == null || director.isBlank()) {
+            return (List<Film>) getAll();
+        }
+
         try (Session session = sessionFactory.openSession()) {
             Query<Film> query = session.createQuery("FROM Film WHERE director LIKE :queryDirector", Film.class)
                     .setParameter("queryDirector", likeTemplate(director));
@@ -64,6 +88,14 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     @Override
     public List<Film> getAllFilmByRentPrice(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
+            if (from == null) {
+                from = 0L;
+            }
+
+            if (to == null) {
+                to = Long.MAX_VALUE;
+            }
+
             Query<Film> query = session.createQuery("FROM Film WHERE rent_price BETWEEN :from AND :to", Film.class)
                     .setParameter("from", from)
                     .setParameter("to", to);
@@ -74,6 +106,14 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     @Override
     public List<Film> getAllFilmByPurchasePrice(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
+            if (from == null) {
+                from = 0L;
+            }
+
+            if (to == null) {
+                to = Long.MAX_VALUE;
+            }
+
             Query<Film> query = session.createQuery("FROM Film WHERE purchase_price BETWEEN :from AND :to", Film.class)
                     .setParameter("from", from)
                     .setParameter("to", to);
