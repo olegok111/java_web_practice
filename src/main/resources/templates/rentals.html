@@ -35,7 +35,7 @@
             <td colspan="6" th:unless="${search}"> В базе пока нет ни одного проката.
                 Добавьте прокат на странице клиента. </td>
         </tr>
-        <tr th:each="rental : ${rentals}">
+        <tr class="entry" th:each="rental : ${rentals}">
             <td>
                 <span th:if="${rental.getRent_or_purchase() == RENT}">А</span>
                 <span th:if="${rental.getRent_or_purchase() == PURCHASE}">П</span>

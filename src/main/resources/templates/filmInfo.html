@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:replace="common :: site-header"></div>
-<h4 th:text="'#' + ${film.getId()} + ' ' + ${film.getTitle()}"></h4>
+<h4 id="idName" th:text="'#' + ${film.getId()} + ' ' + ${film.getTitle()}"></h4>
 <p th:text="'Жанр: ' + ${film.getGenre()}"></p>
 <p th:text="'Компания: ' + ${film.getCompany()}"></p>
 <p th:text="'Режиссёр: ' + ${film.getDirector()}"></p>

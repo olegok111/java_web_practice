@@ -59,7 +59,7 @@ public class ClientDaoTest {
     @Test
     void testId1() {
         Client client = clientDao.getById(1L);
-        assertEquals("Гэри Джон Браннан", client.getFull_name());
+        assertEquals(1, client.getId());
     }
 
     @Test

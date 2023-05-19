@@ -8,9 +8,9 @@
 <body>
     <div th:replace="common :: site-header"></div>
 
-    <h4 th:text="'#' + ${client.getId()} + ' ' + ${client.getFull_name()}"></h4>
-    <p th:text="'E-mail: ' + ${client.getEmail()}"></p>
-    <p th:text="${client.getPhone()} ? 'Телефон: ' + ${client.getPhone()} : 'Телефон: (нет)'"></p>
+    <h4 id="idName" th:text="'#' + ${client.getId()} + ' ' + ${client.getFull_name()}"></h4>
+    <p id="email" th:text="'E-mail: ' + ${client.getEmail()}"></p>
+    <p id="phone" th:text="${client.getPhone()} ? 'Телефон: ' + ${client.getPhone()} : 'Телефон: (нет)'"></p>
 
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <form method="get" action="/rentalAdd">

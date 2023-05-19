@@ -88,36 +88,44 @@ public class FilmDaoImpl extends CommonDaoImpl<Film, Long> implements FilmDao {
     @Override
     public List<Film> getAllFilmByRentPrice(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
-            if (from == null) {
-                from = 0L;
-            }
-
-            if (to == null) {
-                to = Long.MAX_VALUE;
-            }
-
-            Query<Film> query = session.createQuery("FROM Film WHERE rent_price BETWEEN :from AND :to", Film.class)
-                    .setParameter("from", from)
+            if (from == null && to == null) {
+                return (List<Film>) getAll();
+            } else if (to == null) {
+                Query<Film> query = session.createQuery("FROM Film WHERE rent_price >= :from", Film.class)
+                    .setParameter("from", from);
+                return query.getResultList().size() == 0 ? null : query.getResultList();
+            } else if (from == null) {
+                Query<Film> query = session.createQuery("FROM Film WHERE rent_price <= :to", Film.class)
                     .setParameter("to", to);
-            return query.getResultList().size() == 0 ? null : query.getResultList();
+                return query.getResultList().size() == 0 ? null : query.getResultList();
+            } else {
+                Query<Film> query = session.createQuery("FROM Film WHERE rent_price BETWEEN :from AND :to", Film.class)
+                        .setParameter("from", from)
+                        .setParameter("to", to);
+                return query.getResultList().size() == 0 ? null : query.getResultList();
+            }
         }
     }
 
     @Override
     public List<Film> getAllFilmByPurchasePrice(Long from, Long to) {
         try (Session session = sessionFactory.openSession()) {
-            if (from == null) {
-                from = 0L;
-            }
-
-            if (to == null) {
-                to = Long.MAX_VALUE;
-            }
-
-            Query<Film> query = session.createQuery("FROM Film WHERE purchase_price BETWEEN :from AND :to", Film.class)
-                    .setParameter("from", from)
+            if (from == null && to == null) {
+                return (List<Film>) getAll();
+            } else if (to == null) {
+                Query<Film> query = session.createQuery("FROM Film WHERE purchase_price >= :from", Film.class)
+                    .setParameter("from", from);
+                return query.getResultList().size() == 0 ? null : query.getResultList();
+            } else if (from == null) {
+                Query<Film> query = session.createQuery("FROM Film WHERE purchase_price <= :to", Film.class)
                     .setParameter("to", to);
-            return query.getResultList().size() == 0 ? null : query.getResultList();
+                return query.getResultList().size() == 0 ? null : query.getResultList();
+            } else {
+                Query<Film> query = session.createQuery("FROM Film WHERE purchase_price BETWEEN :from AND :to", Film.class)
+                        .setParameter("from", from)
+                        .setParameter("to", to);
+                return query.getResultList().size() == 0 ? null : query.getResultList();
+            }
         }
     }
 

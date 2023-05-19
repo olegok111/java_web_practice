@@ -75,12 +75,19 @@ public class FilmController {
                              @RequestParam(name = "rentPriceTo", required = false) Long rentPriceTo, 
                              Model model) {
         List<Film> res = filmDao.getAllFilmByTitle(title);
+        logger.info("1:" + res.size());
         res = myRetainAll(res, filmDao.getAllFilmByGenre(genre));
+        logger.info("2:" + res.size());
         res = myRetainAll(res, filmDao.getAllFilmByCompany(company));
+        logger.info("3:" + res.size());
         res = myRetainAll(res, filmDao.getAllFilmByDirector(director));
+        logger.info("4:" + res.size());
         res = myRetainAll(res, filmDao.getAllFilmByYear(releaseYearFrom, releaseYearTo));
+        logger.info("5:" + res.size());
         res = myRetainAll(res, filmDao.getAllFilmByRentPrice(rentPriceFrom, rentPriceTo));
+        logger.info("6:" + res.size());
         res = myRetainAll(res, filmDao.getAllFilmByPurchasePrice(purchasePriceFrom, purchasePriceTo));
+        logger.info("7:" + res.size());
         model.addAttribute("films", res);
         model.addAttribute("search", true);
         return "films";

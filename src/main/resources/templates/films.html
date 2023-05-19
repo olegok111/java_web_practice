@@ -34,7 +34,7 @@
     </form>
     <br>
     <form method="get" action="/filmEdit">
-        <button id="addfilmButton" type="submit" class="btn btn-primary">Добавить фильм</button>
+        <button id="addFilmButton" type="submit" class="btn btn-primary">Добавить фильм</button>
     </form>
     <br>
     <table class="table table-bordered table-warning">
@@ -45,7 +45,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${films.isEmpty()}">
+        <tr class="noFilmsMsg" th:if="${films.isEmpty()}">
             <td colspan="6" th:if="${search}"> Таких фильмов нет.</td>
             <td colspan="6" th:unless="${search}"> В базе пока нет ни одного фильма. <a href="/filmEdit">Добавить?</a></td>
         </tr>
